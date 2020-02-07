@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.test.news"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rxjava2adapter
+    implementation deps.rxjava.rxjava2
+    implementation deps.rxjava.rxrelay2
+    implementation deps.rxjava.rx_android
+    implementation deps.timber
+    implementation deps.okhttp_logging_interceptor
+    implementation deps.kotlin.stdlib
+    implementation deps.support.app_compat
+    implementation deps.support.recycler_view
+    implementation deps.constraint_layout
+    implementation deps.glide.runtime
+    implementation deps.glide.okhttp_integration
+
+    debugImplementation deps.leakcanary.debug
+
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+    kapt deps.lifecycle.compiler
+    kapt deps.glide.compiler
+
+    testImplementation deps.junit
+    androidTestImplementation deps.espresso.junit_ext
+    androidTestImplementation deps.espresso.core
+}
