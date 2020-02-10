@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -27,6 +25,7 @@ abstract class BaseViewModel<Result, ViewState, Intent>(schedulersProvider: Sche
 
     private val disposable: Disposable
     private val intentsRelay = BehaviorRelay.create<Intent>()
+    private var isInitialIntentDispatched = false
     val viewState = MutableLiveData<ViewState>()
 
     init {
@@ -47,6 +46,17 @@ abstract class BaseViewModel<Result, ViewState, Intent>(schedulersProvider: Sche
      */
     fun dispatchIntent(intent: Intent) {
         intentsRelay.accept(intent)
+    }
+
+    /**
+     * Dispatching intent with this method assures that
+     * intent will be dispatched only once across view model lifecycle
+     */
+    fun dispatchInitialIntent(intent: Intent) {
+        if (isInitialIntentDispatched.not()) {
+            isInitialIntentDispatched = true
+            dispatchIntent(intent)
+        }
     }
 
     protected abstract fun handleIntent(intent: Intent): Observable<Result>

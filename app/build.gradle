@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'SERVER_URL', "$FeedUrl"
     }
     buildTypes {
         release {
@@ -46,6 +47,8 @@ dependencies {
     implementation deps.glide.okhttp_integration
     implementation deps.room.runtime
     implementation deps.room.rxjava2
+    implementation deps.glide.runtime
+    implementation deps.glide.okhttp_integration
 
     debugImplementation deps.leakcanary.debug
 
@@ -54,6 +57,7 @@ dependencies {
     kapt deps.lifecycle.compiler
     kapt deps.glide.compiler
     kapt deps.room.compiler
+    kapt deps.glide.compiler
 
     testImplementation deps.junit
     testImplementation deps.mockito.core

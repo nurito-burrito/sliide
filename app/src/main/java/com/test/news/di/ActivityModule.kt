@@ -1,6 +1,7 @@
 package com.test.news.di
 
 import com.test.news.features.login.presentation.LoginActivity
+import com.test.news.features.news.presentation.NewsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,4 +13,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityModule {
     @ContributesAndroidInjector
     abstract fun contributeLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeNewsActivity(): NewsActivity
 }

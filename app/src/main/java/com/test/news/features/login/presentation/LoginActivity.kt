@@ -1,7 +1,6 @@
 package com.test.news.features.login.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +11,7 @@ import com.test.news.features.login.domain.LoginFailReason.Companion.WRONG_PASSW
 import com.test.news.features.login.domain.LoginFailReason.Companion.WRONG_USER_NAME
 import com.test.news.features.login.domain.LoginResult
 import com.test.news.features.login.presentation.LoginIntent.LoginUser
+import com.test.news.features.news.presentation.NewsActivity
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
         when (loginResult) {
             is LoginResult.LoginFailed -> showLoginError(loginResult.failReason)
             is LoginResult.LoginSucceed -> {
-                Toast.makeText(this, "Start with premiurm: ${loginResult.user.isPremium}", Toast.LENGTH_SHORT).show()
+                startActivity(NewsActivity.getStartIntent(this, loginResult.user.isPremium))
                 finish()
             }
         }

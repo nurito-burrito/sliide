@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--General-->
     <dimen name="default_screen_vertical_padding">24dp</dimen>
     <dimen name="default_screen_horizontal_padding">16dp</dimen>
     <dimen name="internal_spacer_small">8dp</dimen>
     <dimen name="internal_spacer_big">24dp</dimen>
+
+    <!--Login screen-->
     <dimen name="login_widgets_max_width">480dp</dimen>
+
+    <!--News screen-->
+    <dimen name="news_image_item_padding">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
 </resources>

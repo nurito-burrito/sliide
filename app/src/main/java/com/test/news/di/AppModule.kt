@@ -10,13 +10,16 @@ import com.test.news.base.DefaultSchedulersProvider
 import com.test.news.base.SchedulersProvider
 import com.test.news.db.AppDatabase
 import com.test.news.db.UsersDao
+import com.test.news.features.news.data.repository.NewsApi
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
+import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -75,6 +78,23 @@ class AppModule {
     @Provides
     fun provideSchedulersProvider(): SchedulersProvider {
         return DefaultSchedulersProvider()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideMonitoredItemsApi(
+        okHttpClient: OkHttpClient,
+        gson: Gson,
+        factory: CallAdapter.Factory
+    ): NewsApi {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BuildConfig.SERVER_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(factory)
+            .build()
+            .create(NewsApi::class.java)
     }
 
     companion object {
