@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
  *  @param Result is the result of model and represents input value for view
  *  @param ViewState represents view state which is rendered to the user
  */
-abstract class BaseViewModel<Result, ViewState, Intent> : ViewModel() {
+abstract class BaseViewModel<Result, ViewState, Intent>(schedulersProvider: SchedulersProvider) : ViewModel() {
 
     private val disposable: Disposable
     private val intentsRelay = BehaviorRelay.create<Intent>()
@@ -31,10 +31,10 @@ abstract class BaseViewModel<Result, ViewState, Intent> : ViewModel() {
 
     init {
         disposable = intentsRelay
-            .throttleFirst(VIEW_TOUCH_DELAY_MS, TimeUnit.MILLISECONDS, Schedulers.computation())
-            .observeOn(Schedulers.io())
+            .throttleFirst(VIEW_TOUCH_DELAY_MS, TimeUnit.MILLISECONDS, schedulersProvider.getComputationScheduler())
+            .observeOn(schedulersProvider.getIoScheduler())
             .flatMap { handleIntent(it) }
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(schedulersProvider.getUiScheduler())
             .subscribe({ viewState.value = reduceViewState(it) }, { Timber.e(it) })
     }
 

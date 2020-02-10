@@ -1,8 +1,11 @@
 package com.test.news.di
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.test.news.features.login.presentation.LoginViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 
 /**
  * Module for providing app view models dependencies
@@ -13,4 +16,9 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindPhotosViewModel(loginViewModel: LoginViewModel): ViewModel
 }

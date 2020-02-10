@@ -40,9 +40,12 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.support.app_compat
     implementation deps.support.recycler_view
+    implementation deps.support.design
     implementation deps.constraint_layout
     implementation deps.glide.runtime
     implementation deps.glide.okhttp_integration
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
 
     debugImplementation deps.leakcanary.debug
 
@@ -50,8 +53,14 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.lifecycle.compiler
     kapt deps.glide.compiler
+    kapt deps.room.compiler
 
     testImplementation deps.junit
+    testImplementation deps.mockito.core
+    testImplementation deps.mockito.inline
+    testImplementation deps.arch_core
+
     androidTestImplementation deps.espresso.junit_ext
     androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.test_rules
 }

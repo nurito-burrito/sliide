@@ -2,9 +2,14 @@ package com.test.news.di
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.test.news.BuildConfig
+import com.test.news.base.DefaultSchedulersProvider
+import com.test.news.base.SchedulersProvider
+import com.test.news.db.AppDatabase
+import com.test.news.db.UsersDao
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -51,7 +56,29 @@ class AppModule {
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
 
+    @Singleton
+    @Provides
+    fun provideDatabase(app: Application): AppDatabase {
+        return Room
+            .databaseBuilder(app, AppDatabase::class.java, DATABASE_NAME)
+            .createFromAsset(DATABASE_NAME)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUsersDao(database: AppDatabase): UsersDao {
+        return database.usersDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSchedulersProvider(): SchedulersProvider {
+        return DefaultSchedulersProvider()
+    }
+
     companion object {
-        const val CONNECTION_TIMEOUT_SECONDS = 20L
+        private const val DATABASE_NAME = "users.db"
+        private const val CONNECTION_TIMEOUT_SECONDS = 20L
     }
 }
