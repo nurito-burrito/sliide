@@ -1,5 +1,11 @@
 # Sliide QA Technical Test
+## Congratulations, you have reached the next stage which is solving a Sliide practical test.
 ##### Please create your own repo and share the solution with us
+
+### Description
+During the test we want you to imagine yourself as a member of our team, with a collective goal of getting our tasks completed. 
+
+When we have reviewed your test, and any accompanying documents you feel necessary, if we like what we see, we’ll invite you to join us for a video conversation during which we’ll ask you to go through your test, explaining any decisions that you made.
 
 Let’s start!
 
