@@ -1,3 +1,12 @@
+# Manual test results:
+1. login credentials wasn't correct
+2. app starts from scratch when killed and reopened, meaning doesn't cache any info or state
+3. dublicated images on the news list
+4. no way to log out
+5. no validations in textfields
+6. no state for the login button
+
+
 # Sliide QA Technical Test
 ## Congratulations, you have reached the next stage which is solving a Sliide practical test.
 ##### Please create your own repo and share the solution with us
@@ -92,4 +101,4 @@ You can access the android project with implemented features below.
 
 At Sliide we highly appreciate good communication at all times so, if you have any questions, don’t hesitate to ask   
 
-## Good luck!   
+## Good luck!

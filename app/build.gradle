@@ -67,4 +67,5 @@ dependencies {
     androidTestImplementation deps.espresso.junit_ext
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.test_rules
+    androidTestImplementation 'com.schibsted.spain:barista:3.2.0'
 }
